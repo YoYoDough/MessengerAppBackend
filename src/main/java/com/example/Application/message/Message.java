@@ -12,11 +12,9 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "sender_id")
     private Long senderId;
     private String content;
-
-    @Column(name = "created_at")
+    
     private Timestamp createdAt;
 
     public Message(){}
