@@ -14,7 +14,7 @@ public class Message {
 
     private Long senderId;
     private String content;
-    
+
     private Timestamp createdAt;
 
     public Message(){}
