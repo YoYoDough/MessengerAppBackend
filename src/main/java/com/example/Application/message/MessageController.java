@@ -24,4 +24,6 @@ public class MessageController {
     public void addMessages(@RequestBody Message message){
         messageService.postMessages(message);
     }
+
+
 }

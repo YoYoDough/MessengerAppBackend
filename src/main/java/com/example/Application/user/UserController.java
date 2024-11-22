@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -20,8 +21,22 @@ public class UserController {
     }
 
     @GetMapping
-    public void getUsers(){
+    public List<User> getUsers(){
         System.out.println(userService.getUsers());
+        return userService.getUsers();
+    }
+
+    @GetMapping("/input")
+    public ResponseEntity<?> getUsersFromInput(){
+        System.out.println(userService.getUsers());
+
+        List<User> users = userService.getUsers();
+        if (users.size() > 0){
+            return ResponseEntity.ok(users);
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Users not found!");
+        }
     }
 
     @GetMapping("/exists")
