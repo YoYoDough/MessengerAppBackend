@@ -8,23 +8,25 @@ public class Friend {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long user_id;
-    private Long friend_id;
+    @Column(name = "user_id")
+    private Long userId;
+    @Column(name  = "friend_id")
+    private Long friendId;
 
     private String status;
 
     public Friend(){}
 
-    public Friend(Long id, Long user_id, Long friend_id, String status) {
+    public Friend(Long id, Long userId, Long friendId, String status) {
         this.id = id;
-        this.user_id = user_id;
-        this.friend_id = friend_id;
+        this.userId = userId;
+        this.friendId = friendId;
         this.status = status;
     }
 
-    public Friend(Long user_id, Long friend_id, String status){
-        this.user_id = user_id;
-        this.friend_id = friend_id;
+    public Friend(Long userId, Long friendId, String status){
+        this.userId = userId;
+        this.friendId = friendId;
         this.status = status;
     }
 
@@ -45,27 +47,27 @@ public class Friend {
     }
 
     public Long getFriend_id() {
-        return friend_id;
+        return friendId;
     }
 
-    public void setFriend_id(Long friend_id) {
-        this.friend_id = friend_id;
+    public void setFriend_id(Long friendId) {
+        this.friendId = friendId;
     }
 
     public Long getUser_id() {
-        return user_id;
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUser_id(Long userId) {
+        this.userId = userId;
     }
 
     @Override
     public String toString() {
         return "Friend{" +
                 "id=" + id +
-                ", user_id=" + user_id +
-                ", friend_id=" + friend_id +
+                ", user_id=" + userId +
+                ", friend_id=" + friendId +
                 ", status='" + status + '\'' +
                 '}';
     }
