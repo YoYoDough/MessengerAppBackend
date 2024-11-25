@@ -11,6 +11,6 @@ public class FriendService {
     }
 
     public void postFriend(Friend friend){
-
+        friendRepository.save(friend);
     }
 }
