@@ -66,6 +66,13 @@ public class UserController {
         }
     }
 
+    @GetMapping("/self")
+    public ResponseEntity<Long> getUserId(@RequestParam String name){
+        System.out.println(name);
+        Long userId = userService.getUserId(name);
+        return ResponseEntity.ok(userId);
+    }
+
     @PostMapping
     public void addUser(@RequestBody User user){
         userService.postUsers(user);

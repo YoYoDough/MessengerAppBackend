@@ -48,4 +48,9 @@ public class UserService {
         }
         return null; // Return null if credentials do not match
     }
+
+    public Long getUserId(String name) {
+        Optional<User> user = userRepository.findByName(name);
+        return user.get().getId();
+    }
 }
