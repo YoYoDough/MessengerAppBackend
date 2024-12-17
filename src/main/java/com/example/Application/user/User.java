@@ -1,5 +1,6 @@
 package com.example.Application.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.IdGeneratorType;
 
@@ -10,8 +11,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @JsonIgnore
     private String email;
 
+    @JsonIgnore
     private String password;
 
     private String image;
