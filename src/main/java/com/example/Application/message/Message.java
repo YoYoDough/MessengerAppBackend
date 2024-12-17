@@ -1,8 +1,11 @@
 package com.example.Application.message;
 
+import com.example.Application.conversations.Conversation;
+import com.example.Application.user.User;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Table
 @Entity
@@ -12,22 +15,31 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long senderId;
+    @ManyToOne
+    @JoinColumn(name = "conversation_id")
+    private Conversation conversation;
+
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
+    private User sender;
+
     private String content;
 
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 
     public Message(){}
 
-    public Message(Long id, Long senderId, String content, Timestamp createdAt){
+    public Message(Long id, Conversation conversation, User sender, String content, LocalDateTime createdAt){
         this.id = id;
-        this.senderId = senderId;
+        this.conversation = conversation;
+        this.sender = sender;
         this.content = content;
-        this.createdAt = createdAt;
+        this.createdAt = LocalDateTime.now();
     }
 
-    public Message(Long senderId, String content, Timestamp createdAt){
-        this.senderId =senderId;
+    public Message(Conversation conversation, User sender, String content, LocalDateTime createdAt){
+        this.conversation = conversation;
+        this.sender =sender;
         this.content = content;
         this.createdAt = createdAt;
     }
@@ -40,12 +52,20 @@ public class Message {
         this.id = id;
     }
 
-    public Long getSenderId() {
-        return senderId;
+    public Conversation getConversation() {
+        return conversation;
     }
 
-    public void setSenderId(Long sender_id) {
-        this.senderId = sender_id;
+    public void setConversation(Conversation conversation) {
+        this.conversation = conversation;
+    }
+
+    public User getSender() {
+        return sender;
+    }
+
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
     public String getContent() {
@@ -56,11 +76,11 @@ public class Message {
         this.content = content;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -68,7 +88,8 @@ public class Message {
     public String toString() {
         return "Message{" +
                 "id=" + id +
-                ", sender_id=" + senderId +
+                ", conversation=" + conversation +
+                ", sender=" + sender +
                 ", content='" + content + '\'' +
                 ", createdAt=" + createdAt +
                 '}';

@@ -16,7 +16,8 @@ public class MessageController {
     }
 
     @GetMapping
-    public void getMessages(){
+    public List<> getMessages(){
+
         System.out.println(messageService.getMessagesFromDatabase());
     }
 

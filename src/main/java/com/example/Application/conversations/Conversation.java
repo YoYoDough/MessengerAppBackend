@@ -1,6 +1,10 @@
 package com.example.Application.conversations;
 
+import com.example.Application.user.User;
 import jakarta.persistence.*;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -8,23 +12,30 @@ public class Conversation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long senderId;
-    private Long receiverId;
-    private String message;
+
+    @ManyToOne
+    @JoinColumn(name = "user1_id")
+    private User user1;
+
+    @ManyToOne
+    @JoinColumn(name = "user2_id")
+    private User user2;
+
+    private LocalDateTime createdAt;
 
     public Conversation(){}
 
-    public Conversation(Long id, Long senderId, Long receiverId, String message){
+    public Conversation(Long id, User user1, User user2){
         this.id = id;
-        this.senderId = senderId;
-        this.receiverId = receiverId;
-        this.message = message;
+        this.user1 = user1;
+        this.user2 = user2;
+        this.createdAt = LocalDateTime.now();
     }
 
-    public Conversation(Long senderId, Long receiverId, String message){
-        this.receiverId = receiverId;
-        this.senderId = senderId;
-        this.message = message;
+    public Conversation(User user1, User user2){
+        this.user1 = user1;
+        this.user2 = user2;
+        this.createdAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -35,37 +46,37 @@ public class Conversation {
         this.id = id;
     }
 
-    public Long getSenderId() {
-        return senderId;
+    public User getUser1() {
+        return user1;
     }
 
-    public void setSenderId(Long senderId) {
-        this.senderId = senderId;
+    public void setUser1(User user1) {
+        this.user1 = user1;
     }
 
-    public Long getReceiverId() {
-        return receiverId;
+    public User getUser2() {
+        return user2;
     }
 
-    public void setReceiverId(Long receiverId) {
-        this.receiverId = receiverId;
+    public void setUser2(User user2) {
+        this.user2 = user2;
     }
 
-    public String getMessage() {
-        return message;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override
     public String toString() {
         return "Conversation{" +
                 "id=" + id +
-                ", senderId=" + senderId +
-                ", receiverId=" + receiverId +
-                ", message='" + message + '\'' +
+                ", user1=" + user1 +
+                ", user2=" + user2 +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }
