@@ -19,29 +19,23 @@ public class Message {
     @JoinColumn(name = "conversation_id")
     private Conversation conversation;
 
-    @ManyToOne
-    @JoinColumn(name = "sender_id")
-    private User sender;
-
     private String content;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime sentAt;
 
     public Message(){}
 
-    public Message(Long id, Conversation conversation, User sender, String content, LocalDateTime createdAt){
+    public Message(Long id, Conversation conversation, String content, LocalDateTime sentAt){
         this.id = id;
         this.conversation = conversation;
-        this.sender = sender;
         this.content = content;
-        this.createdAt = LocalDateTime.now();
+        this.sentAt = sentAt;
     }
 
-    public Message(Conversation conversation, User sender, String content, LocalDateTime createdAt){
+    public Message(Conversation conversation, User sender, String content, LocalDateTime sentAt){
         this.conversation = conversation;
-        this.sender =sender;
         this.content = content;
-        this.createdAt = createdAt;
+        this.sentAt = sentAt;
     }
 
     public Long getId() {
@@ -60,14 +54,6 @@ public class Message {
         this.conversation = conversation;
     }
 
-    public User getSender() {
-        return sender;
-    }
-
-    public void setSender(User sender) {
-        this.sender = sender;
-    }
-
     public String getContent() {
         return content;
     }
@@ -76,12 +62,12 @@ public class Message {
         this.content = content;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getSentAt() {
+        return sentAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setSentAt(LocalDateTime sentAt) {
+        this.sentAt = sentAt;
     }
 
     @Override
@@ -89,9 +75,8 @@ public class Message {
         return "Message{" +
                 "id=" + id +
                 ", conversation=" + conversation +
-                ", sender=" + sender +
                 ", content='" + content + '\'' +
-                ", createdAt=" + createdAt +
+                ", sentAt=" + sentAt +
                 '}';
     }
 }
