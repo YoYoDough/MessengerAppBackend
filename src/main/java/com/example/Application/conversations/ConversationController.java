@@ -30,9 +30,10 @@ public class ConversationController {
     }
 
     @GetMapping("/{selfId}")
-    public ResponseEntity<?> getConversationsAttachedWithUser(@PathVariable Long selfId){
+    public ResponseEntity<?> getConversationsAttachedWithUser(@PathVariable String selfId){
         System.out.println("Self ID: " + selfId);
-        List<Conversation> conversations = conversationService.getUserConversations(selfId);
+        Long id = Long.parseLong(selfId);
+        List<ConversationWithLastMessage> conversations = conversationService.getUserConversations(id);
         return ResponseEntity.ok(conversations);
     }
 }
