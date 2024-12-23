@@ -19,21 +19,25 @@ public class Message {
     @JoinColumn(name = "conversation_id")
     private Conversation conversation;
 
+    private Long senderId;
+
     private String content;
 
     private LocalDateTime sentAt;
 
     public Message(){}
 
-    public Message(Long id, Conversation conversation, String content, LocalDateTime sentAt){
+    public Message(Long id, Conversation conversation, Long senderId, String content, LocalDateTime sentAt){
         this.id = id;
         this.conversation = conversation;
+        this.senderId = senderId;
         this.content = content;
         this.sentAt = sentAt;
     }
 
-    public Message(Conversation conversation, User sender, String content, LocalDateTime sentAt){
+    public Message(Conversation conversation, Long senderId, String content, LocalDateTime sentAt){
         this.conversation = conversation;
+        this.senderId = senderId;
         this.content = content;
         this.sentAt = sentAt;
     }

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @Controller
 @RequestMapping("/api/messages")
 @CrossOrigin("http://localhost:3000")
@@ -22,9 +24,9 @@ public class MessageController {
     }
 
     @PostMapping
-    public void addMessages(@RequestBody Message message){
+    public void addMessages(@RequestBody MessageRequest messageRequest){
+        System.out.println(messageRequest);
+        Message message = messageService.createMessage(messageRequest.getConversationId(), messageRequest.getSenderId(), messageRequest.getInput());
         messageService.postMessages(message);
     }
-
-
 }

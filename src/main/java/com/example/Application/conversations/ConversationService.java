@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -54,6 +55,9 @@ public class ConversationService {
         return conversations.stream().map(conversation -> {
             Message lastMessage = messageRepository.findTopByConversationOrderBySentAtDesc(conversation);
             return new ConversationWithLastMessage(conversation, lastMessage);
-        }).toList();
+        })
+                .sorted(Comparator.comparing((ConversationWithLastMessage c) ->
+                        c.getLastMessage() != null ? c.getLastMessage().getSentAt() : LocalDateTime.MIN).reversed()) // Sort by most recent
+                .toList();
     }
 }
