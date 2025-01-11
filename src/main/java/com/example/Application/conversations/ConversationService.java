@@ -55,9 +55,10 @@ public class ConversationService {
         return conversations.stream().map(conversation -> {
             Message lastMessage = messageRepository.findTopByConversationOrderBySentAtDesc(conversation);
             return new ConversationWithLastMessage(conversation, lastMessage);
-        })
-                .sorted(Comparator.comparing((ConversationWithLastMessage c) ->
-                        c.getLastMessage() != null ? c.getLastMessage().getSentAt() : LocalDateTime.MIN).reversed()) // Sort by most recent
-                .toList();
+        }).toList();
+    }
+
+    public Conversation getConversation(Long user1Id, Long user2Id) {
+        return conversationRepository.findByUser1IdAndUser2Id(user1Id, user2Id);
     }
 }

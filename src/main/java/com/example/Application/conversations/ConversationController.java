@@ -26,7 +26,13 @@ public class ConversationController {
     public ResponseEntity<?> insertConversation(@RequestBody ConversationRequest request){
         System.out.println(request.toString());
         Conversation conversation = conversationService.createOrGetConversation(request.getUser1Id(), request.getUser2Id());
-        return ResponseEntity.ok(conversation.getId());
+        return ResponseEntity.ok(conversation);
+    }
+
+    @PostMapping("/getconvo")
+    public ResponseEntity<?> getConversation(@RequestBody ConversationRequest request){
+        Conversation conversation = conversationService.getConversation(request.getUser1Id(), request.getUser2Id());
+        return ResponseEntity.ok(conversation);
     }
 
     @GetMapping("/{selfId}")

@@ -20,4 +20,8 @@ public class FriendService {
         System.out.println(friendRepository.findFriendIdsByUserId(userId));
         return friendRepository.findFriendIdsByUserId(userId);
     }
+
+    //public int getFriendRequestCount() {
+        //return friendRepository.findAll();
+    //}
 }

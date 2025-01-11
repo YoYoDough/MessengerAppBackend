@@ -49,4 +49,10 @@ public class FriendController {
         System.out.println("Friends: " + friends); // Debugging step
         return ResponseEntity.ok(friends);
     }
+
+    //@GetMapping("/count")
+    //public ResponseEntity<?> getFriendRequestCount(){
+        //int count = friendService.getFriendRequestCount();
+        //return ResponseEntity.ok(count);
+    //}
 }
