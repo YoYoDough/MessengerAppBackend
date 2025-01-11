@@ -33,4 +33,10 @@ public class MessageService {
         Message newMessage = new Message(conversation, senderId, input, LocalDateTime.now());
         return newMessage;
     }
+
+    public List<Message> getMessagesWithConversationId(Long conversationId) {
+        Conversation conversation = conversationRepository.findById(conversationId).get();
+        List<Message> messages = messageRepository.findByConversation(conversation);
+        return messages;
+    }
 }
