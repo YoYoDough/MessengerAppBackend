@@ -37,6 +37,7 @@ public class MessageService {
     public List<Message> getMessagesWithConversationId(Long conversationId) {
         Conversation conversation = conversationRepository.findById(conversationId).get();
         List<Message> messages = messageRepository.findByConversation(conversation);
+        System.out.println(messages.get(0));
         return messages;
     }
 }

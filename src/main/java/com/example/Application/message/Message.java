@@ -58,6 +58,14 @@ public class Message {
         this.conversation = conversation;
     }
 
+    public Long getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(Long senderId) {
+        this.senderId = senderId;
+    }
+
     public String getContent() {
         return content;
     }

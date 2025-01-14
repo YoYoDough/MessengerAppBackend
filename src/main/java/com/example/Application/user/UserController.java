@@ -42,6 +42,7 @@ public class UserController {
     @GetMapping("/exists")
     public ResponseEntity<?> getUserByEmail(@RequestParam String email){
         Optional<User> existingUser = userService.getUserWithEmail(email);
+        System.out.println(existingUser.get());
 
         // If the user is found, return the user object
         if (existingUser.isPresent()) {

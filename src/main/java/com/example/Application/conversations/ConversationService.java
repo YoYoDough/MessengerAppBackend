@@ -59,6 +59,6 @@ public class ConversationService {
     }
 
     public Conversation getConversation(Long user1Id, Long user2Id) {
-        return conversationRepository.findByUser1IdAndUser2Id(user1Id, user2Id);
+        return conversationRepository.findByUser1IdAndUser2IdOrUser2IdAndUser1Id(user1Id, user2Id, user1Id, user2Id).get();
     }
 }
