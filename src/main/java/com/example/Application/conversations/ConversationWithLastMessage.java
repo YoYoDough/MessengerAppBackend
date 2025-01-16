@@ -15,15 +15,20 @@ public class ConversationWithLastMessage {
     @ManyToOne
     @JoinColumn(name = "user2_id")
     private User user2;
+    private Long senderId;
     private String lastMessageText;
     private LocalDateTime lastMessageSentAt;
+
+    private LocalDateTime createdAt;
 
     public ConversationWithLastMessage(Conversation conversation, Message lastMessage) {
         this.conversationId = conversation.getId();
         this.user1 = conversation.getUser1();
         this.user2 = conversation.getUser2();
+        this.senderId = lastMessage.getSenderId();
         this.lastMessageText = (lastMessage != null) ? lastMessage.getContent() : "";
         this.lastMessageSentAt = (lastMessage != null) ? lastMessage.getSentAt() : null;
+        this.createdAt = conversation.getCreatedAt();
     }
 
     public Long getConversationId() {
@@ -32,6 +37,22 @@ public class ConversationWithLastMessage {
 
     public void setConversationId(Long conversationId) {
         this.conversationId = conversationId;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Long getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(Long senderId) {
+        this.senderId = senderId;
     }
 
     public User getUser1() {
@@ -72,8 +93,10 @@ public class ConversationWithLastMessage {
                 "conversationId=" + conversationId +
                 ", user1=" + user1 +
                 ", user2=" + user2 +
+                ", senderId=" + senderId +
                 ", lastMessageText='" + lastMessageText + '\'' +
                 ", lastMessageSentAt=" + lastMessageSentAt +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }
