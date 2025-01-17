@@ -42,7 +42,6 @@ public class UserController {
     @GetMapping("/exists")
     public ResponseEntity<?> getUserByEmail(@RequestParam String email){
         Optional<User> existingUser = userService.getUserWithEmail(email);
-        System.out.println(existingUser.get());
 
         // If the user is found, return the user object
         if (existingUser.isPresent()) {
@@ -76,8 +75,10 @@ public class UserController {
         return ResponseEntity.ok(userId);
     }
 
-    @PostMapping
-    public void addUser(@RequestBody User user){
+    @PostMapping("/add")
+    public ResponseEntity<?> addUser(@RequestBody User user){
+        System.out.println(user);
         userService.postUsers(user);
+        return ResponseEntity.ok(user);
     }
 }

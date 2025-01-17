@@ -25,7 +25,7 @@ public class ConversationWithLastMessage {
         this.conversationId = conversation.getId();
         this.user1 = conversation.getUser1();
         this.user2 = conversation.getUser2();
-        this.senderId = lastMessage.getSenderId();
+        this.senderId = (lastMessage != null) ?lastMessage.getSenderId() : null;
         this.lastMessageText = (lastMessage != null) ? lastMessage.getContent() : "";
         this.lastMessageSentAt = (lastMessage != null) ? lastMessage.getSentAt() : null;
         this.createdAt = conversation.getCreatedAt();

@@ -31,7 +31,11 @@ public class ConversationController {
 
     @PostMapping("/getconvo")
     public ResponseEntity<?> getConversation(@RequestBody ConversationRequest request){
+        System.out.println(request);
         Conversation conversation = conversationService.getConversation(request.getUser1Id(), request.getUser2Id());
+        if (conversation == null){
+            return ResponseEntity.status(404).body(null);
+        }
         return ResponseEntity.ok(conversation);
     }
 
