@@ -59,8 +59,9 @@ public class ConversationService {
     }
 
     public Conversation getConversation(Long user1Id, Long user2Id) {
-        if (conversationRepository.findByUser1IdAndUser2IdOrUser2IdAndUser1Id(user1Id, user2Id, user1Id, user2Id).isPresent()){
-            conversationRepository.findByUser1IdAndUser2IdOrUser2IdAndUser1Id(user1Id, user2Id, user1Id, user2Id).get();
+        Optional<Conversation> conversation = conversationRepository.findByUser1IdAndUser2IdOrUser2IdAndUser1Id(user1Id, user2Id, user1Id, user2Id);
+        if (conversation.isPresent()){
+            return conversation.get();
         }
         return null;
     }

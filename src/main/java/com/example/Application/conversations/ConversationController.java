@@ -33,6 +33,7 @@ public class ConversationController {
     public ResponseEntity<?> getConversation(@RequestBody ConversationRequest request){
         System.out.println(request);
         Conversation conversation = conversationService.getConversation(request.getUser1Id(), request.getUser2Id());
+        System.out.println(conversation);
         if (conversation == null){
             return ResponseEntity.status(404).body(null);
         }

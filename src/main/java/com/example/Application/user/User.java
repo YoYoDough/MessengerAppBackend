@@ -13,10 +13,10 @@ public class User {
     private Long id;
     private String name;
 
-    @JsonProperty
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String email;
 
-    @JsonProperty
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     private String image;
