@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -52,10 +53,27 @@ public class ConversationService {
 
     public List<ConversationWithLastMessage> getUserConversations(Long selfId) {
         List<Conversation> conversations = conversationRepository.findAllByUser1IdOrUser2Id(selfId, selfId);
-        return conversations.stream().map(conversation -> {
+        List<ConversationWithLastMessage> conversationsWithLastMessages = conversations.stream().map(conversation -> {
             Message lastMessage = messageRepository.findTopByConversationOrderBySentAtDesc(conversation);
             return new ConversationWithLastMessage(conversation, lastMessage);
-        }).toList();
+        }).collect(Collectors.toList());
+        System.out.println(conversationsWithLastMessages);
+
+        // Sort the conversations by the last message sent time in descending order
+        conversationsWithLastMessages.sort((c1, c2) -> {
+            // Handle null values: Place conversations with null last message sent time at the end
+            if (c1.getLastMessageSentAt() == null) {
+                return 1;  // Place conversations with null sent time at the end
+            }
+            if (c2.getLastMessageSentAt() == null) {
+                return -1; // Place conversations with null sent time at the end
+            }
+
+            // Compare based on last message sent at in descending order
+            return c2.getLastMessageSentAt().compareTo(c1.getLastMessageSentAt());
+        });
+
+        return conversationsWithLastMessages;
     }
 
     public Conversation getConversation(Long user1Id, Long user2Id) {
