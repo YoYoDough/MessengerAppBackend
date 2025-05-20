@@ -35,6 +35,7 @@ public class MessageController {
     @GetMapping("withconvo")
     public ResponseEntity<?> getMessagesAttachedToConvo(@RequestParam Long conversationid){
         List<Message> messages = messageService.getMessagesWithConversationId(conversationid);
+        System.out.println("Searching for Messages...");
         return ResponseEntity.ok(messages);
     }
 }

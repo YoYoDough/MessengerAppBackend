@@ -5,6 +5,7 @@ import com.example.Application.user.User;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 public class ConversationWithLastMessage {
@@ -17,9 +18,9 @@ public class ConversationWithLastMessage {
     private User user2;
     private Long senderId;
     private String lastMessageText;
-    private LocalDateTime lastMessageSentAt;
+    private Instant lastMessageSentAt;
 
-    private LocalDateTime createdAt;
+    private Instant createdAt;
 
     public ConversationWithLastMessage(Conversation conversation, Message lastMessage) {
         this.conversationId = conversation.getId();
@@ -39,11 +40,11 @@ public class ConversationWithLastMessage {
         this.conversationId = conversationId;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -79,11 +80,11 @@ public class ConversationWithLastMessage {
         this.lastMessageText = lastMessageText;
     }
 
-    public LocalDateTime getLastMessageSentAt() {
+    public Instant getLastMessageSentAt() {
         return lastMessageSentAt;
     }
 
-    public void setLastMessageSentAt(LocalDateTime lastMessageSentAt) {
+    public void setLastMessageSentAt(Instant lastMessageSentAt) {
         this.lastMessageSentAt = lastMessageSentAt;
     }
 

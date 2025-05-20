@@ -7,6 +7,7 @@ import com.example.Application.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
@@ -47,7 +48,7 @@ public class ConversationService {
         Conversation newConversation = new Conversation();
         newConversation.setUser1(user1);
         newConversation.setUser2(user2);
-        newConversation.setCreatedAt(LocalDateTime.now());
+        newConversation.setCreatedAt(Instant.now());
         return conversationRepository.save(newConversation);
     }
 

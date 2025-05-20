@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Table
 @Entity
@@ -23,11 +24,11 @@ public class Message {
 
     private String content;
 
-    private LocalDateTime sentAt;
+    private Instant sentAt;
 
     public Message(){}
 
-    public Message(Long id, Conversation conversation, Long senderId, String content, LocalDateTime sentAt){
+    public Message(Long id, Conversation conversation, Long senderId, String content, Instant sentAt){
         this.id = id;
         this.conversation = conversation;
         this.senderId = senderId;
@@ -35,7 +36,7 @@ public class Message {
         this.sentAt = sentAt;
     }
 
-    public Message(Conversation conversation, Long senderId, String content, LocalDateTime sentAt){
+    public Message(Conversation conversation, Long senderId, String content, Instant sentAt){
         this.conversation = conversation;
         this.senderId = senderId;
         this.content = content;
@@ -74,11 +75,11 @@ public class Message {
         this.content = content;
     }
 
-    public LocalDateTime getSentAt() {
+    public Instant getSentAt() {
         return sentAt;
     }
 
-    public void setSentAt(LocalDateTime sentAt) {
+    public void setSentAt(Instant sentAt) {
         this.sentAt = sentAt;
     }
 

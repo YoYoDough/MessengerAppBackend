@@ -4,6 +4,7 @@ import com.example.Application.user.User;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,7 +22,7 @@ public class Conversation {
     @JoinColumn(name = "user2_id")
     private User user2;
 
-    private LocalDateTime createdAt;
+    private Instant createdAt;
 
     public Conversation(){}
 
@@ -29,13 +30,13 @@ public class Conversation {
         this.id = id;
         this.user1 = user1;
         this.user2 = user2;
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = Instant.now();
     }
 
     public Conversation(User user1, User user2){
         this.user1 = user1;
         this.user2 = user2;
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = Instant.now();
     }
 
     public Long getId() {
@@ -62,11 +63,11 @@ public class Conversation {
         this.user2 = user2;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 
